@@ -2,6 +2,12 @@
 
 <p align=center>Given a stream of GeoJSON Features - Produce Validation Stats &amp; Output Validated Stream</p>
 
+## Installation & Use
+
+```sh
+npm add @openaddresses/validate
+```
+
 ## Validation Options
 
 ### Number Validation

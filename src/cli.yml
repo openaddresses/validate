@@ -1,0 +1,107 @@
+name: rai-toolkit
+about: Calculate and conflate multiple roadnetworks, calculating RAI
+version: 0.1.0
+args:
+    - database:
+        short: d
+        long: database
+        value_name: DATABASE
+        help: Specify an alternate database in format USER@HOST:PORT/DATABASE or USER:PASS@PORT/DATABASE
+        takes_value: true
+
+subcommands:
+    - filter:
+        about: Filter OSM data to only include linestrings/highways
+        args:
+            - OSM:
+                help: The base OSM file to filter
+                required: true
+                index: 1
+
+    - list:
+        about: List countries that are currently loaded
+
+    - viz:
+        about: Once a country is calc, open a webserver to visualize the output
+        args:
+            - iso:
+                long: iso
+                value_name: ISO
+                help: Specify the ISO 3166-alpha2 code of the country to drop
+                takes_value: true
+                required: true
+
+    - drop:
+        about: Drop a loaded country from the database
+        args:
+            - iso:
+                long: iso
+                value_name: ISO
+                help: Specify the ISO 3166-alpha2 code of the country to drop
+                takes_value: true
+                required: true
+
+    - conflate:
+        about: Conflate two street networks together
+        args:
+            - MASTER:
+                help: The base geospatial road network
+                required: true
+                index: 1
+            - NEW:
+                help: The geospatial road network to merge in
+                required: true
+                index: 2
+            - iso:
+                long: iso
+                value_name: ISO
+                help: Specify the ISO 3166-alpha2 code of the country to drop
+                takes_value: true
+                required: true
+            - langs:
+                long: langs
+                value_name: LANGS
+                help: Specify the ISO language values for a given country (comma separated)
+                takes_value: true
+                required: true
+            - output:
+                long: output
+                short: o
+                value_name: OUTPUT
+                help: Output file to write to
+                takes_value: true
+                required: true
+            - buffer:
+                long: buffer
+                short: b
+                value_name: BUFFER
+                help: If two roads are within the given buffer (metres) don't conflate them (Default 50)
+                takes_value: true
+                required: false
+
+    - calc:
+        about: Calculate RAI
+        args:
+            - iso:
+                long: iso
+                value_name: ISO
+                help: Specify the ISO 3166-alpha2 code of the country for the calculation
+                takes_value: true
+                required: true
+            - bounds:
+                long: bounds
+                value_name: BOUNDS
+                help: Specify a file of line-delimited GeoJSON polygons to calculate RAI within
+                takes_value: true
+                required: false
+            - output:
+                long: output
+                short: o
+                value_name: OUTPUT
+                help: Output file to write RAI calculations to
+                takes_value: true
+                required: true
+            - NETWORK:
+                help: The base geospatial road network
+                required: true
+                index: 1

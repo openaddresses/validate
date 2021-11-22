@@ -1,0 +1,16 @@
+[package]
+name = "oa-validate"
+version = "0.1.0"
+authors = ["ingalls <nick@ingalls.ca>"]
+edition = "2021"
+
+[dependencies]
+geocoder-abbreviations = "4.2.0"
+
+[dependencies.clap]
+version = "3.0.0-beta.5"
+features = ["yaml"]
+
+[dependencies.geojson]
+version = "0.18.0"
+features = [ "geo-types" ]
