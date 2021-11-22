@@ -7,7 +7,7 @@ fn main() {
     match args.subcommand() {
         Some(("addresses", sub_args)) => oa_validate::addresses::main(&sub_args),
         _ => {
-            println!("Invalid Subcommand: ./rai-toolkit --help for valid options");
+            println!("Invalid Subcommand: ./oa-validate --help for valid options");
             std::process::exit(1);
         },
     }

@@ -10,13 +10,13 @@ subcommands:
                 long: output
                 short: o
                 value_name: OUTPUT
-                help: Output file to write to
+                about: Output file to write to
                 takes_value: true
-                required: true
+                required: false
             - input:
                 long: input
                 short: i
                 value_name: INPUT
-                help: Input file to read from
+                about: Input file to read from
                 takes_value: true
                 required: false
