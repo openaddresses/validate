@@ -1,5 +1,3 @@
-use postgis::ewkb::EwkbWrite;
-
 ///
 /// A representation of a single polygon
 ///
@@ -44,50 +42,5 @@ impl Polygon {
             props: props,
             geom: geom
         })
-    }
-
-    ///
-    /// Return a PG Copyable String of the feature
-    /// props, geom
-    ///
-    pub fn to_tsv(self) -> String {
-        let mut twkb = postgis::twkb::MultiPolygon {
-            polygons: Vec::with_capacity(self.geom.len()),
-            ids: None
-        };
-
-        for py in self.geom {
-            let mut poly = postgis::twkb::Polygon {
-                rings: Vec::with_capacity(py.len())
-            };
-
-            for py_ring in py {
-                let mut ring = postgis::twkb::LineString {
-                    points: Vec::with_capacity(py_ring.len())
-                };
-
-                for pt in py_ring {
-                    ring.points.push(postgis::twkb::Point {
-                        x: pt[0],
-                        y: pt[1],
-                    });
-                }
-
-                poly.rings.push(ring);
-            }
-
-            twkb.polygons.push(poly);
-        }
-
-        let geom = postgis::ewkb::EwkbMultiPolygon {
-            geom: &twkb,
-            srid: Some(4326),
-            point_type: postgis::ewkb::PointType::Point
-        }.to_hex_ewkb();
-
-        format!("{props}\t{geom}\n",
-            props = serde_json::value::Value::from(self.props),
-            geom = geom
-        )
     }
 }

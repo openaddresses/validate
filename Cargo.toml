@@ -6,11 +6,19 @@ edition = "2021"
 
 [dependencies]
 geocoder-abbreviations = "4.2.0"
+unicode-segmentation = "1.3.0"
+memchr = "2.0.2"
+serde_json = "1.0"
+serde_derive = "1.0"
+serde = "1.0"
+lazy_static = "1.3.0"
+regex = "1.1"
+fancy-regex = "0.1"
 
 [dependencies.clap]
 version = "3.0.0-beta.5"
 features = ["yaml"]
 
 [dependencies.geojson]
-version = "0.18.0"
+version = "0.22.0"
 features = [ "geo-types" ]
