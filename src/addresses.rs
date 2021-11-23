@@ -1,7 +1,8 @@
-use crate::stream::{GeoStream, PointStream};
+use crate::stream::{GeoStream, PointStream, OutStream};
 
 pub fn main(args: &clap::ArgMatches) {
-    for pt in PointStream::new(GeoStream::new(args.value_of("INPUT")), None) {
-        print!("{}", pt);
-    }
+    let stream = PointStream::new(GeoStream::new(args.value_of("INPUT")), None);
+
+    OutStream::new(args.value_of("OUTPUT"))
+        .stream(stream);
 }
