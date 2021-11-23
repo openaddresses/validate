@@ -6,6 +6,7 @@ pub mod addresses;
 pub use text::Tokenized;
 pub use text::Tokens;
 pub use types::polygon::Polygon;
+pub use types::point::Point;
 pub use types::context::Context;
 pub use types::name::Source;
 pub use types::name::Name;
