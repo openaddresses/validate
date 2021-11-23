@@ -9,7 +9,7 @@ pub struct GeoStream {
 
 pub enum Input {
     File(std::io::Lines<BufReader<File>>),
-    StdIn(std::io::Lines<std::io::StdinLock<'static>>),
+    StdIn(std::io::Lines<BufReader<std::io::StdinLock<'static>>>),
 }
 
 impl GeoStream {
@@ -23,7 +23,7 @@ impl GeoStream {
             },
             None => {
                 GeoStream {
-                    input: Input::StdIn(Box::leak(Box::new(io::stdin())).lock().lines())
+                    input: Input::StdIn(BufReader::new(Box::leak(Box::new(io::stdin())).lock()).lines())
                 }
             }
         };
