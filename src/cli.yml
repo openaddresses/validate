@@ -6,6 +6,13 @@ subcommands:
     - addresses:
         about: Address Validation
         args:
+            - meta:
+                long: meta
+                short: m
+                value_name: meta
+                about: Out JSON Metadata
+                takes_value: true
+                required: false
             - output:
                 long: output
                 short: o
