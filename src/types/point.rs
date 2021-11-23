@@ -1,15 +1,20 @@
+use std::fmt;
+use std::string::ToString;
+
 ///
 /// A representation of a single point
 ///
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct Point {
     /// An optional identifier for the address
     pub id: Option<i64>,
 
     /// JSON representation of properties
+    #[serde(rename(serialize = "properties"))]
     pub props: serde_json::Map<String, serde_json::Value>,
 
     /// Simple representation of Lng/Lat geometry
+    #[serde(rename(serialize = "geometry"))]
     pub geom: Vec<geojson::PointType>
 }
 
@@ -42,5 +47,13 @@ impl Point {
             props: props,
             geom: geom
         })
+    }
+}
+
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let val = serde_json::to_string(&self).unwrap();
+
+        write!(f, "{}\n", val)
     }
 }
